@@ -2,7 +2,7 @@ package com.example.textprocessor.utils;
 
 import org.apache.commons.lang3.StringUtils;
 
-public class MessageValidator {
+public final class MessageValidator {
 
     private static final int MAX_LENGTH = 1000;
 

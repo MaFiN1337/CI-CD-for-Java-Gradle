@@ -28,8 +28,8 @@ public class MessageProcessor {
 
     private String cleanMessage(String message) {
         return message.trim()
-                .replaceAll("\\s+", " ") // replace multiple spaces with a single space
-                .replaceAll("[^\\w\\s\\p{L}\\p{M}.,!?-]", ""); // keep only letters, digits, and basic punctuation
+                .replaceAll("\\s+", " ")
+                .replaceAll("[^\\w\\s\\p{L}\\p{M}.,!?-]", "");
     }
 
     public ProcessingStats getStats() {
