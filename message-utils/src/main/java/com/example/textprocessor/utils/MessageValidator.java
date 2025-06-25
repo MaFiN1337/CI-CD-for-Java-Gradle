@@ -15,10 +15,10 @@ public class MessageValidator {
 
 
     public static boolean containsNoForbiddenWords(String message) {
-        if (message == null) return false;
+        if (message == null) { return false; }
 
-        String[] forbiddenWords = {"spam", "advertisement", "promotion"};
-        String lowerMessage = message.toLowerCase();
+        final String[] forbiddenWords = {"spam", "advertisement", "promotion"};
+        final String lowerMessage = message.toLowerCase();
 
         for (String word : forbiddenWords) {
             if (lowerMessage.contains(word)) {

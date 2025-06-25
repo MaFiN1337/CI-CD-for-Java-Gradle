@@ -9,14 +9,14 @@ public class ProcessorBasicTest {
 
     @Test
     void testTrimMessage() {
-        String input = "   Hello   ";
-        String output = input.trim();
+        final String input = "   Hello   ";
+        final String output = input.trim();
         assertEquals("Hello", output);
     }
 
     @Test
     void testEmptyMessage() {
-        String message = "";
+        final String message = "";
         assertTrue(message.isEmpty());
     }
 }

@@ -21,7 +21,7 @@ public class MessageApp {
         boolean running = true;
         while (running) {
             System.out.print("Choose option (1-5): ");
-            String choice = scanner.nextLine().trim();
+            final String choice = scanner.nextLine().trim();
 
             switch (choice) {
                 case "1":
@@ -67,9 +67,9 @@ public class MessageApp {
 
     private static void processNewMessage() {
         System.out.print("Enter message for processing: ");
-        String message = scanner.nextLine();
+        final String message = scanner.nextLine();
 
-        ProcessingResult result = processor.processMessage(message);
+        final ProcessingResult result = processor.processMessage(message);
 
         System.out.println("\n--- Processing Result ---");
         if (result.isSuccess()) {
@@ -88,7 +88,7 @@ public class MessageApp {
         String message;
 
         while (!(message = scanner.nextLine()).isEmpty()) {
-            ProcessingResult result = processor.processMessage(message);
+            final ProcessingResult result = processor.processMessage(message);
             processed++;
 
             System.out.printf("%d. %s %s%n",
@@ -102,14 +102,14 @@ public class MessageApp {
     }
 
     private static void showStatistics() {
-        ProcessingStats stats = processor.getStats();
+        final ProcessingStats stats = processor.getStats();
 
         System.out.println("\n=== STATISTICS ===");
         System.out.println(stats);
 
-        int total = stats.getProcessedCount() + stats.getRejectedCount();
+        final int total = stats.getProcessedCount() + stats.getRejectedCount();
         if (total > 0) {
-            double successRate = (double) stats.getProcessedCount() / total * 100;
+            final double successRate = (double) stats.getProcessedCount() / total * 100;
             System.out.printf("Success rate: %.1f%%%n", successRate);
         }
     }
@@ -118,7 +118,7 @@ public class MessageApp {
         System.out.println("\n=== ALL MESSAGES ===");
 
         System.out.println("\n Processed messages:");
-        var processed = processor.getProcessedMessages();
+        final var processed = processor.getProcessedMessages();
         if (processed.isEmpty()) {
             System.out.println("  (none)");
         } else {
@@ -128,7 +128,7 @@ public class MessageApp {
         }
 
         System.out.println("\n Rejected messages:");
-        var rejected = processor.getRejectedMessages();
+        final var rejected = processor.getRejectedMessages();
         if (rejected.isEmpty()) {
             System.out.println("  (none)");
         } else {

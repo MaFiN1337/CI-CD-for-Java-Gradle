@@ -20,7 +20,7 @@ public class MessageProcessor {
             return new ProcessingResult(false, "Message contains forbidden words", message);
         }
 
-        String processedMessage = cleanMessage(message);
+        final String processedMessage = cleanMessage(message);
         processedMessages.add(processedMessage);
 
         return new ProcessingResult(true, "Message successfully processed", processedMessage);
@@ -41,7 +41,7 @@ public class MessageProcessor {
     }
 
     private double calculateAverageLength() {
-        if (processedMessages.isEmpty()) return 0.0;
+        if (processedMessages.isEmpty()) { return 0.0; }
 
         return processedMessages.stream()
                 .mapToInt(MessageValidator::getEffectiveLength)
