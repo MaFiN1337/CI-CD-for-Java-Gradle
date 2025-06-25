@@ -1,0 +1,39 @@
+plugins {
+    id 'application'
+    id 'com.example.textprocessor.report'
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
+}
+
+application {
+    mainClass.set('com.example.textprocessor.app.MessageApp')
+}
+
+dependencies {
+    implementation project(':message-core')
+    implementation project(':message-utils')
+}
+
+messageProcessorReport {
+    includeStatistics = true
+    includeFileStructure = true
+    reportFormat = 'txt'
+    outputDirectory = 'build/reports'
+}
+
+apply plugin: 'checkstyle'
+
+checkstyle {
+    toolVersion = '10.15.0'
+    configFile = rootProject.file('config/checkstyle/checkstyle.xml')
+}
+
+tasks.withType(Checkstyle).configureEach {
+    reports {
+        xml.required = false
+        html.required = true
+    }
+}

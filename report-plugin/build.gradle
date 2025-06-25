@@ -1,0 +1,32 @@
+plugins {
+    id 'java-gradle-plugin'
+    id 'java'
+}
+
+group = 'com.example.textprocessor'
+version = '1.0.0'
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
+}
+
+gradlePlugin {
+    plugins {
+        messageReportPlugin {
+            id = 'com.example.textprocessor.report'
+            implementationClass = 'com.example.textprocessor.plugin.MessageReportPlugin'
+            displayName = 'Message Processor Report Plugin'
+            description = 'Plugin for generating reports for project text-message-processor'
+        }
+    }
+}
+
+tasks.register('debugPlugin') {
+    doLast {
+        println 'Plugin successfully built as composite build'
+    }
+}
+dependencies {
+    implementation gradleApi()
+}

@@ -1,0 +1,58 @@
+plugins {
+    id 'com.example.textprocessor.report'
+}
+
+allprojects {
+    group = 'com.example.textprocessor'
+    version = '1.0.0'
+
+    repositories {
+        mavenCentral()
+    }
+}
+
+subprojects {
+    apply plugin: 'java'
+
+    java {
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
+    }
+
+    dependencies {
+        implementation 'org.apache.commons:commons-lang3:3.12.0'
+        testImplementation 'org.junit.jupiter:junit-jupiter-api:5.10.2'
+        testRuntimeOnly    'org.junit.jupiter:junit-jupiter-engine:5.10.2'
+        testImplementation 'org.junit.jupiter:junit-jupiter-params:5.10.2'
+        testImplementation 'org.junit.platform:junit-platform-suite:1.10.2'
+    }
+
+    tasks.withType(JavaCompile).tap {
+        configureEach {
+            options.encoding = 'UTF-8'
+        }
+    }
+}
+
+tasks.register('runApp', JavaExec) {
+    group = 'application'
+    description = 'Runs the main text-message-processor application'
+
+    dependsOn ':message-app:classes'
+    classpath = project(':message-app').sourceSets.main.runtimeClasspath
+    mainClass = 'com.example.textprocessor.app.MessageApp'
+}
+
+tasks.register('buildAll') {
+    group = 'build'
+    description = 'Builds all project modules'
+
+    dependsOn subprojects.collect { it.tasks.build }
+}
+
+tasks.register('cleanAll') {
+    group = 'build'
+    description = 'Cleans all project modules'
+
+    dependsOn subprojects.collect { it.tasks.clean }
+}
