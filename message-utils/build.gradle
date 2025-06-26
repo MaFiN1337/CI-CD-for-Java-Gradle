@@ -1,5 +1,6 @@
 plugins {
     id 'java-library'
+    id 'maven-publish'
 }
 
 java {
@@ -30,5 +31,26 @@ tasks.withType(Checkstyle).configureEach {
     reports {
         xml.required = false
         html.required = true
+    }
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+            groupId = 'com.example.textprocessor'
+            artifactId = 'message-utils'
+            version = '1.0.0'
+        }
+    }
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/MaFiN1337/CI-CD-for-Java-Gradle")
+            credentials {
+                username = project.findProperty("gpr.user") ?: System.getenv("USERNAME")
+                password = project.findProperty("gpr.token") ?: System.getenv("GITHUB_TOKEN")
+            }
+        }
     }
 }
