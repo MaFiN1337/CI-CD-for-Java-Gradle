@@ -11,6 +11,10 @@ jobs:
     name: Build & Analyze
     runs-on: ubuntu-latest
 
+    permissions:
+      contents: read
+      packages: write
+
     steps:
       - name: Checkout source code
         uses: actions/checkout@v4
