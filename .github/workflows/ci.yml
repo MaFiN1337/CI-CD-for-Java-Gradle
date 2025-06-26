@@ -41,3 +41,10 @@ jobs:
             message-app/build/libs/*.jar
             message-core/build/libs/*.jar
             message-utils/build/libs/*.jar
+
+      - name: Publish to GitHub Packages
+        run: ./gradlew :message-core:publish
+        env:
+          USERNAME: ${{ secrets.USERNAME }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
